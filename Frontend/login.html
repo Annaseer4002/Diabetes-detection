@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Log in to Diabetes Detection System for secure access to health assessments and insights.">
+    <title>Log In - Diabetes Detection System</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="login-page">
+        <nav class="navbar" role="navigation" aria-label="Main navigation">
+            <div class="nav-brand">
+                <a href="index.html"><h1>Diabetes Detection System</h1></a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="signup.html" class="nav-link cta-btn">Sign Up</a></li>
+            </ul>
+            <button class="menu-toggle" aria-label="Toggle menu" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </nav>
+
+        <main class="login-main">
+            <div class="container">
+                <section class="login-section">
+                    <h2>Welcome Back</h2>
+                    <p class="section-subtitle">Log in to access your private diabetes risk assessments. Your data is encrypted and secure.</p>
+                    
+                    <form id="loginForm" novalidate>
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" name="email" required placeholder="Enter your email" aria-describedby="email-help">
+                            <small id="email-help">Use the email from your sign-up.</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" id="password" name="password" required placeholder="Enter your password" aria-describedby="password-help">
+                            <small id="password-help">Forgot? <a href="forgot-password.html" class="forgot-link">Reset here</a>.</small>
+                        </div>
+
+                        <div class="form-group options-group">
+                            <div class="remember-group">
+                                <input type="checkbox" id="rememberMe" name="rememberMe">
+                                <label for="rememberMe" class="checkbox-label">Remember Me</label>
+                            </div>
+                            <a href="forgot-password.html" class="forgot-link">Forgot Password?</a>
+                        </div>
+
+                        <button type="submit" class="btn-primary full-width">Log In</button>
+                    </form>
+
+                    <p class="signup-link">
+                        Don't have an account? <a href="signup.html">Sign up here</a>.
+                    </p>
+                </section>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <div class="container">
+                <p>&copy; 2023 Diabetes Detection System. All rights reserved.</p>
+                <div class="footer-links">
+                    <a href="#privacy">Privacy Policy</a>
+                    <a href="#terms">Terms of Service</a>
+                </div>
+                <div class="disclaimer">
+                    <p><strong>Security Note:</strong> Logins are protected with encryption. If you suspect unauthorized access, contact support immediately. Consult a doctor for medical advice.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

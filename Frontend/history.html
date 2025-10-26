@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Patient History | Diabetes Detection System</title>
+  <link rel="stylesheet" href="history.css" />
+</head>
+<body>
+  <!-- 🔹 NAVBAR -->
+  <nav class="navbar">
+    <div class="nav-brand">Diabetes Detection System</div>
+    <ul class="nav-links">
+      <li><a href="landing.html">Home</a></li>
+      <li><a href="dashboard.html">Dashboard</a></li>
+      <li><a href="assessment.html">Assessment</a></li>
+      <li><a href="history.html" class="active">History</a></li>
+     
+      <li><a href="#" id="logoutBtn">Logout</a></li>
+    </ul>
+    <div class="menu-toggle" id="mobileMenu">&#9776;</div>
+  </nav>
+
+  <!-- 🔹 MAIN CONTENT -->
+  <div class="dashboard">
+    <section class="patient-history">
+      <h2>Patient Assessment History</h2>
+      <p>Review your previous risk assessments and results below.</p>
+
+      <table class="history-table" id="historyTable">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Risk Level</th>
+            <th>Summary</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td colspan="3">Loading history...</td></tr>
+        </tbody>
+      </table>
+    </section>
+  </div>
+
+  <script src="history.js"></script>
+</body>
+</html>

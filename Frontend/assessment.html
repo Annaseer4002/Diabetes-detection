@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Diabetes Assessment</title>
+  <link rel="stylesheet" href="assessment.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f6f8;
+      color: #333;
+      margin: 0;
+      padding: 20px;
+    }
+    .container {
+      max-width: 600px;
+      background: #fff;
+      padding: 20px;
+      margin: 40px auto;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .symptom-group label {
+      display: block;
+      margin-bottom: 8px;
+    }
+    button {
+      background: #007BFF;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 15px;
+    }
+    button:hover {
+      background: #0056b3;
+    }
+    .result {
+      margin-top: 20px;
+      background: #e9f7ef;
+      padding: 15px;
+      border-radius: 8px;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  
+  <nav class="navbar">
+    <h1>Diabetes Detection System</h1>
+    <div class="nav-links">
+      <a href="landing.html">Home</a>
+      <a href="dashboard.html" >Dashboard</a>
+      <a href="assessment.html" class="active">Assessment</a>
+      <a href="history.html">History</a>
+      <button id="logoutBtn" class="logout">Logout</button>
+    </div>
+  </nav>
+
+  <div class="container">
+
+    <h2>Diabetes Risk Assessment</h2>
+
+    <form id="assessmentForm">
+      <div class="symptom-group">
+        <label><input type="checkbox" name="symptom" value="more skin and/or yeast infection"> More Skin and/or Yeast Infection</label>
+        <label><input type="checkbox" name="symptom" value="excessive thirst"> Excessive Thirst</label>
+        <label><input type="checkbox" name="symptom" value="sudden weight loss"> Sudden Weight Loss</label>
+        <label><input type="checkbox" name="symptom" value="extreme tiredness"> Extreme Tiredness</label>
+        <label><input type="checkbox" name="symptom" value="blurred vision"> Blurred Vision</label>
+        <label><input type="checkbox" name="symptom" value="frequent urination"> Frequent Urination</label>
+        <label><input type="checkbox" name="symptom" value="lack of energy"> Lack of Energy</label>
+      </div>
+
+      <button type="submit" id="assessBtn">Assess Now</button>
+    </form>
+
+    <div class="result" id="resultBox">
+      <h3>Result</h3>
+      <p><strong>Risk Level:</strong> <span id="riskLevel"></span></p>
+      <p><strong>Treatments:</strong></p>
+      <ul id="treatmentList"></ul>
+    </div>
+  </div>
+
+  <script src="assessment.js"></script>
+</body>
+</html>

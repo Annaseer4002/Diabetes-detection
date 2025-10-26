@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Patient Dashboard - Diabetes Detection System</title>
+  <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+  <nav class="navbar">
+    <h1>Diabetes Detection System</h1>
+    <div class="nav-links">
+      <a href="landing.html">Home</a>
+      <a href="dashboard.html" class="active">Dashboard</a>
+      <a href="assessment.html">Assessment</a>
+      <a href="history.html">History</a>
+      <button id="logoutBtn" class="logout">Logout</button>
+    </div>
+  </nav>
+
+  <main class="container">
+    <section class="profile-card">
+      <h2>Welcome, <span id="patientName"></span> 👋</h2>
+      <p><strong>Full Name:</strong> <span id="patientFullname"></span></p>
+      <p><strong>Gender:</strong> <span id="patientGender"></span></p>
+      <p><strong>Age:</strong> <span id="patientAge"></span></p>
+
+      <button id="goToAssessment" class="btn">Go to Assessment</button>
+    </section>
+  </main>
+
+  <script src="dashboard.js"></script>
+</body>
+</html>
