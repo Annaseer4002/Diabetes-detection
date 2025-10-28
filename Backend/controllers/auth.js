@@ -1,6 +1,7 @@
 const bcrypt = require('bcryptjs')
 const Auth = require("../models/auth")
 const jwt = require('jsonwebtoken')
+const sendMail = require('../utils/sendMails')
 
 
 const signup = async (req,  res) => {
@@ -27,7 +28,9 @@ const signup = async (req,  res) => {
       return res.status(400).json({ success: false, message: "Password must be up to 6 characters" });
 
    
+     try {
 
+        
 
     const existingUser = await Auth.findOne({email})
 
@@ -54,6 +57,13 @@ const signup = async (req,  res) => {
 
      await user.save()
 
+     await sendMail({
+        to: email,
+        subject: 'Welcome to Diabetes Detection System',
+        text: `Hello ${fullname},\n\nThank you for signing up for our Diabetes Detection System. We're excited to have you on board!\n\nBest regards,\nThe Team`,
+        html: `<p>Hello ${fullname},</p><p>Thank you for signing up for our Diabetes Detection System. We're excited to have you on board!</p><p>Best regards,<br>The Team</p>`
+     })
+
 
 
      res.status(201).json({
@@ -62,6 +72,18 @@ const signup = async (req,  res) => {
         data: user
      })
 
+
+
+
+
+        
+     } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: 'Server error',
+            error: error.message
+        })
+     }
    
 }
 
@@ -97,6 +119,15 @@ const login = async (req, res) => {
         const RefreshToken = jwt.sign({
             userId: existingUser._id
         }, process.env.REFRESH_TOKEN, {expiresIn: '7d'
+        })
+
+
+
+        await sendMail({
+            to: existingUser.email,
+            subject: 'Login Notification',
+            text: `Hello ${existingUser.fullname},\n\nWe noticed a login to your account. If this was you, no further action is needed. If you did not log in, please reset your password immediately.\n\nBest regards,\nThe Team`,
+            html: `<p>Hello ${existingUser.fullname},</p><p>We noticed a login to your account. If this was you, no further action is needed. If you did not log in, please reset your password immediately.</p><p>Best regards,<br>The Team</p>`
         })
 
          res.status(200).json({

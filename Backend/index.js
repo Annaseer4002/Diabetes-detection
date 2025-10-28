@@ -31,3 +31,8 @@ app.get('/', (req, res)=>{
 })
 
 app.use('/api', routes)
+
+
+app.use((req, res)=>{
+    return res.status(404).json({message: 'This Endpoint does not exist'})
+})

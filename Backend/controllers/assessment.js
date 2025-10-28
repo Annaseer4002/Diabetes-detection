@@ -1,4 +1,8 @@
-const Assessment = require("../models/assessment")
+
+const Assessment = require("../models/assessment");
+const Auth = require("../models/auth");
+
+const sendMail = require('../utils/sendMails')
 
 // const createAssessment = async (req, res) => {
 //   try {
@@ -74,7 +78,6 @@ const Assessment = require("../models/assessment")
 //   }
 // };
 
-
 const createAssessment = async (req, res) => {
   try {
     const { patientId, symptoms } = req.body;
@@ -82,6 +85,13 @@ const createAssessment = async (req, res) => {
     if (!patientId || !symptoms || !symptoms.length) {
       return res.status(400).json({ success: false, message: "Patient ID and symptoms are required." });
     }
+
+    const user = await Auth.findById(patientId);
+    if (!user) {
+      return res.status(404).json({ success: false, message: "Patient not found." });
+    }
+
+
 
     // Convert all symptom names to lowercase for comparison
 
@@ -134,6 +144,13 @@ const createAssessment = async (req, res) => {
 
     await newAssessment.save();
 
+    await sendMail({
+      to: user.email,
+      subject: 'Your Diabetes Assessment Result',
+      text: `Hello,\n\nYour recent diabetes assessment indicates a risk level of: ${riskLevel}.\n\nRecommended treatments:\n- ${treatments.join('\n- ')}\n\nPlease consult your healthcare provider for further guidance.\n\nBest regards,\nThe Team`,
+      html: `<p>Hello,</p><p>Your recent diabetes assessment indicates a risk level of: <strong>${riskLevel}</strong>.</p><p>Recommended treatments:</p><ul>${treatments.map(t => `<li>${t}</li>`).join('')}</ul><p>Please consult your healthcare provider for further guidance.</p><p>Best regards,<br>The Team</p>`
+    })
+
     res.status(201).json({
       success: true,
       message: "Assessment created successfully",
@@ -158,8 +175,44 @@ const findAssessments = async (req, res) => {
 }
 
 
+// 📜 Get all assessments for a specific patient
+const getAssessmentHistory = async (req, res) => {
+  try {
+    const { patientId } = req.params;
+
+    // Validate patient ID
+    if (!patientId) {
+      return res.status(400).json({ success: false, message: "Patient ID is required" });
+    }
+
+    // Find all assessments for the patient
+    const history = await Assessment.find({ patientId }).sort({ createdAt: -1 });
+
+    if (!history.length) {
+      return res.status(200).json({
+        success: true,
+        message: "No assessments found for this patient",
+        data: [],
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "Assessment history fetched successfully",
+      data: history,
+    });
+  } catch (error) {
+    console.error("Error fetching history:", error);
+    res.status(500).json({ success: false, message: "Server error", error: error.message });
+  }
+};
+
+
+
+
 
 module.exports = {
     createAssessment,
-    findAssessments
+    findAssessments,
+    getAssessmentHistory
 }

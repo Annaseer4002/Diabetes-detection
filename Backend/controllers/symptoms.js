@@ -31,6 +31,13 @@ const symptom = async (req, res) => {
 
     await symptom.save()
 
+    await sendMail({
+        to: email,
+        subject: 'New Symptom Added',
+        text: `Hello Admin,\n\nA new symptom with ID: ${id} has been added to the system.\n\nBest regards,\nThe Team`,
+        html: `<p>Hello Admin,</p><p>A new symptom with ID: ${id} has been added to the system.</p><p>Best regards,<br>The Team</p>`
+    })
+
     res.status(201).json({
         success: true,
         message: 'Symptom added successfully',
