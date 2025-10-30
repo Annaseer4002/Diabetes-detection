@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // ✅ Logout handler
   logoutBtn.addEventListener("click", () => {
     localStorage.removeItem("patientId");
-    window.location.href = "landing.html";
+    window.location.href = "index.html";
   });
 
   // ✅ On form submit
